@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FilenameUtils;
+
 /**
  * This class epresents an FCS file and allows consumers to interact with FCS file properties
  * through an easy to use api.
@@ -39,7 +41,14 @@ public class FCSFile extends File {
 	
 	public FCSFile(String path) throws IOException {
 		super(path);
-
+		
+		if(!this.exists())
+			throw new IllegalArgumentException("File passed in to FCS file constructor does not exist");
+		
+		String fileExtension = FilenameUtils.getExtension(this.getAbsolutePath());
+		if(!fileExtension.equalsIgnoreCase("fcs"))
+			throw new IllegalArgumentException("File passed in to FCSFile constructor has invalid file extension: " + fileExtension);
+		
 		// Read the FCS file's contents
 		_content = new String(Files.readAllBytes(this.toPath()), StandardCharsets.UTF_8);
 		
@@ -47,7 +56,7 @@ public class FCSFile extends File {
 		
 		BuildPropertyMap();
 	}
-
+	
 	/**
 	 * Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. 
 	 * @param key - the key whose associated value is to be returned 

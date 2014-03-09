@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
+/**
+ * This class loads FCS files and provides mechanisms to filter the loaded FCS files.
+ * 
+ * This class is essentially a collection of FCS files that offer filters. This class does
+ * not need to exist if I depend on a library that filters collections, like labmdaj, however,
+ * I wanted to minimize my external dependencies for this application for SCRI.
+ * @author Ryan
+ *
+ */
 public class FCSFileLoader {
 	// Collection of FCS files
 	private Map<String, FCSFile>  _fcsFiles;
@@ -19,19 +28,19 @@ public class FCSFileLoader {
 	/**
 	 * Loads an FCS file and adds it to the collection of FCS files.
 	 * If the file is already in the collection it's overwritten.
-	 * @param path
+	 * @param file FCS file
 	 * @return FCSFile
 	 * @throws IOException
 	 */
-	public FCSFile LoadFCSFile(String path) throws IOException
+	public FCSFile LoadFCSFile(File file) throws IOException
 	{
 		// Create the FCS file
-		FCSFile file = new FCSFile(path);
+		FCSFile fcsFile = new FCSFile(file.getAbsolutePath());
 		
 		// Save the FCS file
-		_fcsFiles.put(file.getAbsolutePath(), file);
+		_fcsFiles.put(file.getAbsolutePath(), fcsFile);
 		
-		return file;
+		return fcsFile;
 	}
 	
 	/**
