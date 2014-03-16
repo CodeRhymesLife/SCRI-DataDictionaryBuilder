@@ -92,16 +92,19 @@ public class ExcelDataDictionary {
 	 * @param dir Directory to write excel file in
 	 * @param fileName Name of excel file
 	 */
-	public void Write(File dir, String fileName)
+	public Path Write(File dir, String fileName)
 	{
 		// Auto size each column
 		for(int columnIndex = 0; columnIndex < _headRow.getLastCellNum(); columnIndex++)   
 		    _fcsFileInfoSheet.autoSizeColumn(columnIndex);
 		
+		// File path
+		Path filePath = null;
+		
 		// Create the Excel file
 		try {
 			// Create a full path for the new file
-			Path filePath = Paths.get(dir.getAbsolutePath(), fileName + ".xls");
+			filePath = Paths.get(dir.getAbsolutePath(), fileName + ".xls");
 			
 			// Write the excel file
 			FileOutputStream fileOut =  new FileOutputStream(filePath.toString());
@@ -109,7 +112,10 @@ public class ExcelDataDictionary {
 			fileOut.close();
 		} catch ( Exception ex ) {
 	        System.out.println(ex);
+	        filePath = null;
 		}
+		
+		return filePath;
 	}
 	
 	/**

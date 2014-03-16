@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOCase;
@@ -47,14 +49,21 @@ public class Program {
 			// Used to keep track of the FCS files that fail to load
 			List<File> failedFiles = new ArrayList<File>();
 			
+			// Keep track of the successfully created data dictionaries
+			String successFullyCreatedDataDictionaries = "";
+			
 			// Create data dictionaries for all FCS files in each directory
 			for(File dirToSearch : dirsToSearch) {
 				// Attempt to load all FCS files in directory
 				List<FCSFile> successfullyLoadedFCSFiles = getFCSFilesInDir(dirToSearch, failedFiles);
 				
 				// Create a data dictionary from the successfully loaded FCS files
-				createFCSFileDataDictionary(dirToSearch, successfullyLoadedFCSFiles);
+				Path dataDictionaryPath = createFCSFileDataDictionary(dirToSearch, successfullyLoadedFCSFiles);
+				if(dataDictionaryPath != null)
+					successFullyCreatedDataDictionaries += dataDictionaryPath + "\n";
 			}
+			
+			JOptionPane.showMessageDialog(null, "The following FCS files were created:\n" + successFullyCreatedDataDictionaries, "Success", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -117,15 +126,16 @@ public class Program {
 	}
 	
 	/**
-	 * Creates a data dictionary from a list of FCS files.
+	 * 	 * Creates a data dictionary from a list of FCS files.
 	 * @param dir Directory to create data dictionary in
 	 * @param fcsFiles FCS files to create data dictionary from
-	 * @throws IOException
+	 * @return Path to data dictionary if it was created successfully. Null otherwise.
 	 */
-	public static void createFCSFileDataDictionary(File dir, List<FCSFile> fcsFiles) {
+	public static Path createFCSFileDataDictionary(File dir, List<FCSFile> fcsFiles) {
 		// Don't create a data dictionary if we don't have any FCS files
 		if(fcsFiles.size() == 0)
-			return;
+			return null;
+		
 		// Create a data dictionary object to hold FCS file info
 		ExcelDataDictionary dataDictionary = new ExcelDataDictionary();
 		
@@ -142,6 +152,6 @@ public class Program {
 			dataDictionary.AddRowFromFCSFile(file);
 		
 		// Write the excel file in the specified directory with the specified name
-		dataDictionary.Write(dir, "DataDictionary");
+		return dataDictionary.Write(dir, "DataDictionary");
 	}
 }
