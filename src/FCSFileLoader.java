@@ -20,6 +20,7 @@ public class FCSFileLoader {
 	// Collection of FCS files
 	private Map<String, FCSFile>  _fcsFiles;
 	
+	
 	public FCSFileLoader()
 	{
 		_fcsFiles = new HashMap<String, FCSFile>();
@@ -32,13 +33,20 @@ public class FCSFileLoader {
 	 * @return FCSFile
 	 * @throws IOException
 	 */
-	public FCSFile LoadFCSFile(File file) throws IOException
+	public FCSFile LoadFCSFile(File file)
 	{
-		// Create the FCS file
-		FCSFile fcsFile = new FCSFile(file.getAbsolutePath());
-		
-		// Save the FCS file
-		_fcsFiles.put(file.getAbsolutePath(), fcsFile);
+		FCSFile fcsFile = null;
+		try
+		{
+			// Create the FCS file
+			fcsFile = new FCSFile(file.getAbsolutePath());
+			
+			// Save the FCS file
+			_fcsFiles.put(file.getAbsolutePath(), fcsFile);
+		} catch(Exception e)
+		{
+			return null;
+		}
 		
 		return fcsFile;
 	}
