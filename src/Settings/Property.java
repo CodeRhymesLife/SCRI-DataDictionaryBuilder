@@ -5,8 +5,25 @@ public abstract class Property<T> implements IProperty {
 	// Separates values in the property string
 	protected static final String Separator = ";";
 	
+	// Property name
+	private String _name;
+	
 	// Property value
 	private T _propertyValue;
+	
+	public Property(String name)
+	{
+		if(name == null)
+			throw new NullPointerException("name");
+		
+		_name = name;
+	}
+	
+	@Override
+	public String getName()
+	{
+		return _name;
+	}
 	
 	@Override
 	public boolean load(String property)
@@ -43,14 +60,14 @@ public abstract class Property<T> implements IProperty {
 	 */
 	public String Serialize()
 	{
-		return getPropertyTypePrefix() + getSerializedPropertyValue(get());
+		return getPropertyTypePrefix() + getSerializedPropertyValue(getValue());
 	}
 	
 	/**
 	 * Get the property value
 	 * @return Property value
 	 */
-	public T get()
+	public T getValue()
 	{
 		return _propertyValue;
 	}
@@ -60,7 +77,7 @@ public abstract class Property<T> implements IProperty {
 	 * @param propertyValue Property value
 	 * @return property value
 	 */
-	public boolean set(T propertyValue)
+	public boolean setValue(T propertyValue)
 	{
 		// If this value is invalid return false
 		if(propertyValue == null)

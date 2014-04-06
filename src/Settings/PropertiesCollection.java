@@ -4,7 +4,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -27,6 +29,25 @@ public class PropertiesCollection {
 		_properties = LoadProperties(defaults);
 		
 		_propertiesMap = CreatePropertiesMap(_properties);
+	}
+	
+	/**
+	 * Returns a list of all properties in the collection
+	 * @return list of properties in the collection
+	 */
+	public List<IProperty> getProperties()
+	{
+		return new ArrayList<IProperty>(_propertiesMap.values());
+	}
+	
+	/**
+	 * Get the property by it's name
+	 * @param propertyName Property name
+	 * @return Property
+	 */
+	public IProperty getProperty(String propertyName)
+	{
+		return _propertiesMap.get(propertyName);
 	}
 	
 	/**
@@ -104,13 +125,13 @@ public class PropertiesCollection {
 		HashMap<String, IProperty> propertyMap = new HashMap<String, IProperty>();
 		
 		// Iterate over each property and create a property instance from the string value
-		for(String key : properties.stringPropertyNames()) {
+		for(String propertyName : properties.stringPropertyNames()) {
 			// Get a property instance from the property value
-			IProperty property = PropertyFactory.GetProperty(properties.getProperty(key));
+			IProperty property = PropertyFactory.GetProperty(propertyName, properties.getProperty(propertyName));
 
 			// Save the property instance if we have one
 			if(property != null)
-				propertyMap.put(key, property);
+				propertyMap.put(propertyName, property);
 		}
 		
 		return propertyMap;

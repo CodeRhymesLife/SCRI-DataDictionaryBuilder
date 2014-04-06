@@ -7,6 +7,10 @@ import java.util.Map.Entry;
 
 public class StringDictionaryProperty extends Property<Map<String, String>> {
 
+	public StringDictionaryProperty(String name) {
+		super(name);
+	}
+
 	// Property type
 	public static final String PropertyType = "StringDictionary";
 

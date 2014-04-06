@@ -30,6 +30,9 @@ public class ExcelDataDictionary {
 	// from an FCS file for each column
 	private List<ColumnFCSFileDataFetcher> _columnDataFetchers;
 	
+	// True if this dictionary contains FCS file data. False otherwise.
+	private boolean _hasFCSFileData;
+	
 	public ExcelDataDictionary()
 	{
 		// Setup the excel file
@@ -39,6 +42,17 @@ public class ExcelDataDictionary {
         
         // Create a list of data fetchers for each column
         _columnDataFetchers = new ArrayList<ColumnFCSFileDataFetcher>();
+        
+        _hasFCSFileData = false;
+	}
+	
+	/**
+	 * Tells whether this data dictionary has FCS file data
+	 * @return True if this dictionary contains FCS file data. False otherwise.
+	 */
+	public boolean getHasFCSFileData()
+	{
+		return _hasFCSFileData;
 	}
 	
 	/**
@@ -85,6 +99,8 @@ public class ExcelDataDictionary {
 			// Store the FCS file data in the new cell
 			cell.setCellValue(cellValue);
 		}
+		
+		_hasFCSFileData = true;
 	}
 	
 	/**

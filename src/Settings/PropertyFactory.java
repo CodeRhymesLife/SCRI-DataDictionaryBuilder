@@ -6,7 +6,7 @@ public class PropertyFactory {
 	 * @param propertyValue Property value
 	 * @return Property instance from string
 	 */
-	public static IProperty GetProperty(String propertyValue)
+	public static IProperty GetProperty(String propertyName, String propertyValue)
 	{
 		if(propertyValue == null)
 			return null;
@@ -14,11 +14,11 @@ public class PropertyFactory {
 		// Get the correct property
 		IProperty property;
 		if(propertyValue.startsWith(StringProperty.PropertyType + StringProperty.Separator))
-			property = new StringProperty();
+			property = new StringProperty(propertyName);
 		else if(propertyValue.startsWith(BooleanProperty.PropertyType + BooleanProperty.Separator))
-			property = new BooleanProperty();
+			property = new BooleanProperty(propertyName);
 		else if(propertyValue.startsWith(StringDictionaryProperty.PropertyType + StringDictionaryProperty.Separator))
-			property = new StringDictionaryProperty();
+			property = new StringDictionaryProperty(propertyName);
 		else
 			return null;
 		

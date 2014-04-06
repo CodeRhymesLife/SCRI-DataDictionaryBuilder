@@ -2,6 +2,10 @@ package Settings;
 
 public class BooleanProperty extends Property<Boolean> {
 
+	public BooleanProperty(String name) {
+		super(name);
+	}
+
 	// Property type
 	public static final String PropertyType = "Boolean";
 	

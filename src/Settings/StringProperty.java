@@ -2,6 +2,10 @@ package Settings;
 
 public class StringProperty extends Property<String> {
 
+	public StringProperty(String name) {
+		super(name);
+	}
+
 	// Property type
 	public static final String PropertyType = "String";
 	
