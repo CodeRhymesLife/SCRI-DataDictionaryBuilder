@@ -69,6 +69,8 @@ public class Program {
 			}
 			
 			JOptionPane.showMessageDialog(null, "The following FCS files were created:\n" + successFullyCreatedDataDictionaries, "Success", JOptionPane.INFORMATION_MESSAGE);
+			
+			settings.Save();
 		}
 	}
 

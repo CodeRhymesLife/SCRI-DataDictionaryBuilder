@@ -41,6 +41,7 @@ public class StringDictionaryProperty extends Property<Map<String, String>> {
 	protected String getSerializedPropertyValue(Map<String, String> value) {
 		String serializedValue = "";
 		
+		// Loop over key value properties and create a string
 		Iterator<Entry<String, String>> iterator = value.entrySet().iterator();
 	    while (iterator.hasNext()) {
 	        Map.Entry<String, String> keyValuePair = iterator.next();

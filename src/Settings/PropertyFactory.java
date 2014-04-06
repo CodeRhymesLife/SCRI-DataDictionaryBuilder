@@ -13,10 +13,12 @@ public class PropertyFactory {
 		
 		// Get the correct property
 		IProperty property;
-		if(propertyValue.startsWith(StringProperty.PropertyType))
+		if(propertyValue.startsWith(StringProperty.PropertyType + StringProperty.Separator))
 			property = new StringProperty();
-		else if(propertyValue.startsWith(BooleanProperty.PropertyType))
+		else if(propertyValue.startsWith(BooleanProperty.PropertyType + BooleanProperty.Separator))
 			property = new BooleanProperty();
+		else if(propertyValue.startsWith(StringDictionaryProperty.PropertyType + StringDictionaryProperty.Separator))
+			property = new StringDictionaryProperty();
 		else
 			return null;
 		

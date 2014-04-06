@@ -1,4 +1,10 @@
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Properties;
+
+
+
+
 
 
 
@@ -8,6 +14,7 @@ import Settings.BooleanProperty;
 import Settings.IProperty;
 import Settings.PropertiesCollection;
 import Settings.Property;
+import Settings.StringDictionaryProperty;
 import Settings.StringProperty;
 
 
@@ -27,7 +34,26 @@ public class DataDictionaryProperties extends PropertiesCollection {
 		Properties properties = new Properties();
 		
 		// Set defaults
-		setProperty(properties, SaveToMultipleFilesPropertyName, new BooleanProperty(), Boolean.FALSE);
+		{
+			setProperty(properties, SaveToMultipleFilesPropertyName, new BooleanProperty(), Boolean.FALSE);
+			
+			HashMap<String, String> visitDescriptionToVisitIdMap = new HashMap<String, String>();
+			visitDescriptionToVisitIdMap.put("Screening", "100");
+			visitDescriptionToVisitIdMap.put("PreP", "200");
+			visitDescriptionToVisitIdMap.put("PreC", "300");
+			visitDescriptionToVisitIdMap.put("D-1", "400");
+			visitDescriptionToVisitIdMap.put("D1", "500");
+			visitDescriptionToVisitIdMap.put("D3", "700");
+			visitDescriptionToVisitIdMap.put("D7", "800");
+			visitDescriptionToVisitIdMap.put("D10", "900");
+			visitDescriptionToVisitIdMap.put("D14", "1000");
+			visitDescriptionToVisitIdMap.put("D21", "1100");
+			visitDescriptionToVisitIdMap.put("D28", "1200");
+			visitDescriptionToVisitIdMap.put("D29", "1200");
+			visitDescriptionToVisitIdMap.put("D36", "1300");
+			visitDescriptionToVisitIdMap.put("D42", "1400");
+			setProperty(properties, VisitDescriptionToVisitIdMapPropertyName, new StringDictionaryProperty(), visitDescriptionToVisitIdMap);
+		}
 		
 		return properties;
 	}

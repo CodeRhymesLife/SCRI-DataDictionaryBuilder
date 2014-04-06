@@ -24,7 +24,7 @@ public class PropertiesCollection {
 	public PropertiesCollection(String propertiesFilename, Properties defaults){
 		_propertiesFilename = propertiesFilename;
 		
-		_properties = LoadPropertiesFromFile(defaults);
+		_properties = LoadProperties(defaults);
 		
 		_propertiesMap = CreatePropertiesMap(_properties);
 	}
@@ -68,7 +68,7 @@ public class PropertiesCollection {
 	 * @param filename Property filename
 	 * @param defaults Default properties
 	 */
-	private Properties LoadPropertiesFromFile(Properties defaults)
+	private Properties LoadProperties(Properties defaults)
 	{
 		Properties properties = new Properties(defaults);
 		InputStream input = null;
