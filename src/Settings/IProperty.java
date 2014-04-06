@@ -11,7 +11,7 @@ public interface IProperty {
 	 * @param propertyValue Property value to load
 	 * @return True if load successful. False otherwise.
 	 */
-	boolean Load(String propertyValue);
+	boolean load(String propertyValue);
 	
 	/**
 	 * Serializes the given property to a string

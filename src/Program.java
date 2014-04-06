@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
+
+import Settings.PropertiesCollection;
 
 /**
  * Creates data dictionaries from FCS files to enable SCRI to easily import files into LabKey 
@@ -31,6 +34,8 @@ public class Program {
 	 * @param args Not Used
 	 */
 	public static void main(String[] args) {
+		DataDictionaryProperties settings = new DataDictionaryProperties("config.properties");
+		
 		// Ask the user to select a directory containing FCS files
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

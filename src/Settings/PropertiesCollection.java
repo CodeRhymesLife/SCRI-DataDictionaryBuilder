@@ -30,12 +30,37 @@ public class PropertiesCollection {
 	}
 	
 	/**
-	 * Save properties
+	 * Save the properties to the settings file
 	 */
 	public void Save()
 	{
-		throw new NotImplementedException("Save not implemented");
-		/* http://www.mkyong.com/java/java-properties-file-examples/ */
+		OutputStream output = null;
+	 
+		try {
+	 
+			output = new FileOutputStream(_propertiesFilename);
+			
+			// Set each property
+			for (Map.Entry<String, IProperty> propertyEntry : _propertiesMap.entrySet())
+			{
+				_properties.setProperty(propertyEntry.getKey(), propertyEntry.getValue().Serialize());
+			}
+	 
+			// save properties to project root folder
+			_properties.store(output, null);
+	 
+		} catch (IOException io) {
+			io.printStackTrace();
+		} finally {
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+	 
+		}
 	}
 	
 	/**
@@ -49,14 +74,8 @@ public class PropertiesCollection {
 		InputStream input = null;
 		 
 		try {
-			// Load settings file from 
-			input = PropertiesCollection.class.getClassLoader().getResourceAsStream(_propertiesFilename);
-			
-			// If file does not exist return
-    		if(input==null){
-	            System.out.println("Sorry, unable to find " + _propertiesFilename);
-	            return properties;
-    		}
+			// Load settings file 
+			input = new FileInputStream(_propertiesFilename);
 	 
 			// load a properties file
 			properties.load(input);
@@ -88,9 +107,10 @@ public class PropertiesCollection {
 		for(String key : properties.stringPropertyNames()) {
 			// Get a property instance from the property value
 			IProperty property = PropertyFactory.GetProperty(properties.getProperty(key));
-			
-			// Save the property instance
-			propertyMap.put(key, property);
+
+			// Save the property instance if we have one
+			if(property != null)
+				propertyMap.put(key, property);
 		}
 		
 		return propertyMap;
