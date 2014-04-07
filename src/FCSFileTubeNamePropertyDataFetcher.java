@@ -7,7 +7,7 @@
  * 
  * Here's an example of the tube name property:
  * 	"S01 D1 PB"
- * 	S01 - N/A
+ * 	S01 - Participant Id
  * 	D1 - Visit description
  * 	PB - Sample Type
  * 	
@@ -58,6 +58,7 @@ public class FCSFileTubeNamePropertyDataFetcher implements FCSFileDataFetcher {
 
 	public enum SubProperty
 	{
+		ParticitantId(0),
 		VisitDescription(1),
 		SampleType(2);
 		

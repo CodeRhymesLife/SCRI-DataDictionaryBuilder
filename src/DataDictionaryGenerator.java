@@ -183,7 +183,7 @@ public class DataDictionaryGenerator {
 		
 		// Add columns to the data dictionary, specifying how the column fetches data from FCS files
 		dataDictionary.AddColumn("Name", new FCSFileNameDataFetcher());
-		dataDictionary.AddColumn("ParticipantID", new FCSFilePropertyDataFetcher("PATIENT ID"));
+		dataDictionary.AddColumn("ParticipantID", new FCSFileTubeNamePropertyDataFetcher(FCSFileTubeNamePropertyDataFetcher.SubProperty.ParticitantId));
 		dataDictionary.AddColumn("VisitID", new FCSFileVisitIdPropertyDataFetcher(_settings.getVisitDescriptionToVisitIdMapProperty().getValue()));
 		dataDictionary.AddColumn("VisitDescription", new FCSFileTubeNamePropertyDataFetcher(FCSFileTubeNamePropertyDataFetcher.SubProperty.VisitDescription));
 		dataDictionary.AddColumn("Sample Type", new FCSFileTubeNamePropertyDataFetcher(FCSFileTubeNamePropertyDataFetcher.SubProperty.SampleType));
