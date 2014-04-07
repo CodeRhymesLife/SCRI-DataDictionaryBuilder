@@ -40,7 +40,7 @@ public class DataDictionaryProperties extends PropertiesCollection {
 	
 	/**
 	 * Get the data dictionary name property
-	 * @return Data dicitonary name property
+	 * @return Data dictionary name property
 	 */
 	public StringProperty getDataDictionaryNameProperty()
 	{
@@ -66,7 +66,7 @@ public class DataDictionaryProperties extends PropertiesCollection {
 		
 		// Set defaults
 		{
-			setProperty(properties, SaveToMultipleFilesPropertyName, new BooleanProperty(SaveToMultipleFilesPropertyName), Boolean.FALSE);
+			setProperty(properties, SaveToMultipleFilesPropertyName, new BooleanProperty(SaveToMultipleFilesPropertyName), Boolean.TRUE);
 			
 			setProperty(properties, DataDictionaryNamePropertyName, new StringProperty(DataDictionaryNamePropertyName), "DataDictionary");
 			

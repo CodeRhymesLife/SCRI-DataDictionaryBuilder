@@ -1,29 +1,9 @@
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOCase;
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
-import org.apache.commons.io.filefilter.FalseFileFilter;
-import org.apache.commons.io.filefilter.IOFileFilter;
-import org.apache.commons.io.filefilter.SuffixFileFilter;
-
-import Settings.PropertiesCollection;
 
 /**
  * Creates data dictionaries from FCS files to enable SCRI to easily import files into LabKey 
@@ -39,7 +19,7 @@ public class Program {
 	 */
 	public static void main(String[] args) {
 		// Load our settings
-		DataDictionaryProperties settings = new DataDictionaryProperties("config.properties");
+		DataDictionaryProperties settings = new DataDictionaryProperties("settings.txt");
 		
 		// Create our frame and set defaults
 		DataDictionaryJFrame frame = new DataDictionaryJFrame(settings);
@@ -53,6 +33,9 @@ public class Program {
 		final DataDictionaryGenerator dataDictionaryGenerator = new DataDictionaryGenerator(settings);
 		frame.addGenerateActionListener(new ActionListener()
 		{
+			/**
+			 * Generate dictionaries
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dataDictionaryGenerator.GenerateDataDictionaries();

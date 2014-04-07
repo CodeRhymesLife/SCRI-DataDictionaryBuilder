@@ -1,0 +1,4 @@
+#Sun Apr 06 18:42:27 PDT 2014
+VisitDescription\ To\ VisitId\ Map=StringDictionary;Screening;100;D21;1100;PreP;200;D42;1400;D7;800;D36;1300;D28;1200;D29;1200;D14;1000;D10;900;PreC;300;D3;700;D1;500;D-1;400;
+Save\ To\ Multiple\ Files=Boolean;true
+Data\ Dictionary\ Name=String;Foo

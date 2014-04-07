@@ -102,7 +102,7 @@ public class PropertiesCollection {
 			properties.load(input);
 	 
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			// If the file does not exist ignore the exception
 		} finally {
 			if (input != null) {
 				try {
